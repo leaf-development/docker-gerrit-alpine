@@ -1,12 +1,22 @@
 #!/bin/sh
 
-#mkdir -p ${GERRIT_HOME}/etc
-#cp /tmp/config/gerrit.config ${GERRIT_HOME}/etc/gerrit.config
-#cp /tmp/config/secure.config ${GERRIT_HOME}/etc/secure.config
+GERRIT_CONFIG=/tmp/gerrit/gerrit.config
+SECURE_CONFIG=/tmp/gerrit/secure.config
 
-java -jar ${GERRIT_HOME}/gerrit.war init --batch --no-auto-start --site-path ${GERRIT_HOME}/site
-java -jar ${GERRIT_HOME}/gerrit.war reindex --site-path ${GERRIT_HOME}/site
+if [ -f ${GERRIT_CONFIG} ];
+then
+  mkdir -p ${GERRIT_SITE}/etc
+  cp ${GERRIT_CONFIG} ${GERRIT_SITE}/etc/gerrit.config
+fi
 
-#java -jar ${GERRIT_HOME}/gerrit.war init --batch --no-auto-start --site-path ${GERRIT_HOME}/site
+if [ -f ${SECURE_CONFIG} ];
+then
+  mkdir -p ${GERRIT_SITE}/etc
+  cp ${SECURE_CONFIG} ${GERRIT_SITE}/etc/secure.config
+fi
 
-java -jar ${GERRIT_HOME}/gerrit.war daemon --console-log --site-path ${GERRIT_HOME}/site
+java -jar ${GERRIT_HOME}/gerrit.war init --batch --no-auto-start --site-path ${GERRIT_SITE}
+
+java -jar ${GERRIT_HOME}/gerrit.war reindex --site-path ${GERRIT_SITE}
+
+java -jar ${GERRIT_HOME}/gerrit.war daemon --console-log --site-path ${GERRIT_SITE}
