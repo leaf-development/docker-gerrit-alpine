@@ -14,12 +14,6 @@ ARG PLUGIN_VERSION=stable-2.13
 ARG PLUGIN_URL=https://gerrit-ci.gerritforge.com/view/Plugins-${PLUGIN_VERSION}/job
 ARG PLUGIN_DIR=lastSuccessfulBuild/artifact/buck-out/gen/plugins
 
-#ARG MYSQL_CONNECTOR_VERSION=5.1.39
-#ARG MYSQL_CONNECTOR_BASENAME=mysql-connector-java-${MYSQL_CONNECTOR_VERSION}
-#ARG MYSQL_CONNECTOR_DOWNLOAD_FILENAME=${MYSQL_CONNECTOR_BASENAME}.tar.gz
-#ARG MYSQL_CONNECTOR_DOWNLOAD_URL=http://cdn.mysql.com//Downloads/Connector-J/${MYSQL_CONNECTOR_DOWNLOAD_FILENAME}
-#ARG MYSQL_CONNECTOR_FILENAME=${MYSQL_CONNECTOR_BASENAME}-bin.jar
-
 ENV GERRIT_HOME=${GERRIT_HOME} \
     GERRIT_SITE=${GERRIT_SITE} \
     GERRIT_PLUGINS=${GERRIT_PLUGINS}
@@ -36,14 +30,6 @@ ADD ${PLUGIN_URL}/plugin-reviewers-${PLUGIN_VERSION}/${PLUGIN_DIR}/reviewers/rev
 
 ADD ./files/configure-and-run.sh ${GERRIT_HOME}/bin/configure-and-run.sh
 RUN chmod +x ${GERRIT_HOME}/bin/configure-and-run.sh
-
-#ADD ${MYSQL_CONNECTOR_DOWNLOAD_URL} /tmp/${MYSQL_CONNECTOR_DOWNLOAD_FILENAME}
-#RUN mkdir -p /tmp/gerrit/lib/ && \
-#    tar -xzf /tmp/${MYSQL_CONNECTOR_DOWNLOAD_FILENAME} -C /tmp/ && \
-#    cp /tmp/${MYSQL_CONNECTOR_BASENAME}/${MYSQL_CONNECTOR_FILENAME} /tmp/gerrit/lib/${MYSQL_CONNECTOR_FILENAME} && \
-#    rm /tmp/${MYSQL_CONNECTOR_DOWNLOAD_FILENAME} && \
-#    rm -rf /tmp/${MYSQL_CONNECTOR_BASENAME} && \
-#    ls -l /tmp/gerrit/lib/
 
 #RUN addgroup -g ${GERRIT_USER_GID} ${GERRIT_USER} && \
 #    adduser -h ${GERRIT_HOME} -s /bin/sh -u ${GERRIT_USER_GID} -D -G ${GERRIT_USER} -H ${GERRIT_USER} && \
