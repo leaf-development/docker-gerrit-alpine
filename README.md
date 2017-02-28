@@ -34,3 +34,18 @@ docker run \
     --restart always \
     rigoford/docker-gerrit:latest
 ```
+
+If you want to a Gerrit instance with custom configuration use:
+
+```
+docker run \
+    --detach \
+    --name gerrit \
+    --publish 8080:8080 \
+    --publish 29418:29418 \
+    --restart always \
+    --volume `pwd`/config/:/tmp/gerrit/:ro \
+    rigoford/docker-gerrit:latest
+```
+
+Any `gerrit.config`, `reviewers.config` or `secure.config` files located in ``` `pwd`/config``` will be copied into the `$GERRIT_SITE/etc` directory before initialising Gerrit.
