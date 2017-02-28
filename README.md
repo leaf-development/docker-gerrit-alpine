@@ -35,7 +35,7 @@ docker run \
     rigoford/docker-gerrit:latest
 ```
 
-If you want to a Gerrit instance with custom configuration use:
+If you want to create a Gerrit instance with custom configuration use:
 
 ```
 docker run \
