@@ -19,7 +19,7 @@ ENV GERRIT_HOME=${GERRIT_HOME} \
     GERRIT_SITE=${GERRIT_SITE} \
     GERRIT_PLUGINS=${GERRIT_PLUGINS}
 
-RUN apk --no-cache add git
+RUN apk --no-cache add git openssh
 
 RUN mkdir -p ${GERRIT_PLUGINS}
 
