@@ -48,8 +48,6 @@ USER ${GERRIT_USER}
 
 EXPOSE 8080 29418
 
-VOLUME ["${GERRIT_PLUGINS}"]
-
 WORKDIR "${GERRIT_HOME}"
 
 ENTRYPOINT ["./bin/configure-and-run.sh"]

@@ -25,6 +25,11 @@ fi
 java ${JAVA_FLAGS} \
   -jar ${GERRIT_HOME}/gerrit.war init \
   --batch \
+  --install-plugin=commit-message-length-validator \
+  --install-plugin=download-commands \
+  --install-plugin=replication \
+  --install-plugin=reviewnotes \
+  --install-plugin=singleusergroup \
   --no-auto-start \
   --site-path ${GERRIT_SITE}
 
