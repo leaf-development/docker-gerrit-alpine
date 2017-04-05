@@ -1,8 +1,8 @@
 #!/bin/sh
 
-GERRIT_CONFIG=/tmp/gerrit/gerrit.config
-REVIEWERS_CONFIG=/tmp/gerrit/reviewers.config
-SECURE_CONFIG=/tmp/gerrit/secure.config
+GERRIT_CONFIG=${GERRIT_CONFIG_TMP}/gerrit.config
+REVIEWERS_CONFIG=${GERRIT_CONFIG_TMP}/reviewers.config
+SECURE_CONFIG=${GERRIT_CONFIG_TMP}/secure.config
 
 if [ -f ${GERRIT_CONFIG} ];
 then
@@ -32,6 +32,9 @@ java ${JAVA_FLAGS} \
   --install-plugin=singleusergroup \
   --no-auto-start \
   --site-path ${GERRIT_SITE}
+
+cp ${GERRIT_LIB_TMP}/* ${GERRIT_LIB}/
+cp ${GERRIT_PLUGINS_TMP}/* ${GERRIT_PLUGINS}/
 
 java ${JAVA_FLAGS} \
   -jar ${GERRIT_HOME}/gerrit.war reindex \
